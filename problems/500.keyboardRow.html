@@ -1,0 +1,39 @@
+<script>
+var findWords = function(words) {
+  var top = 'qwertyuiop',
+      middle = 'asdfghjkl',
+      bottom = 'zxcvbnm';
+  var result = [];
+  var judge = 0, count = 0;
+  for(var i = 0; i < words.length; i++) {
+    judge = 0;
+    count = 0;
+    for(var j = 0; j < words[i].length; j++) {
+      if(~top.indexOf(words[i][j].toLocaleLowerCase())) {
+        if(judge !== 1) {
+          judge = 1;
+          count++;
+        }
+      } else if(~middle.indexOf(words[i][j].toLocaleLowerCase())) {
+        if(judge !== 2) {
+          judge = 2;
+          count++;
+        }
+      } else if(~bottom.indexOf(words[i][j].toLocaleLowerCase())) {
+        if(judge !== 3) {
+          judge = 3;
+          count++;
+        }
+      }
+      if(count >= 2) {
+        break
+      } else if(j === words[i].length - 1) {
+        result.push(words[i]);
+      }
+    }
+  }
+  return result;
+};
+
+var findWords = words => words.filter(x => /^([qwertyuiop]+|[asdfghjkl]+|[zxcvbnm]+)$/i.test(x));
+</script>

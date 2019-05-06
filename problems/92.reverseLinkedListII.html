@@ -1,0 +1,73 @@
+<script>
+var reverseBetween = function(head, m, n) {
+  if(head === null || head.next === null) {
+    return head;
+  }
+  var reverseHeadPrev = new ListNode(0);
+  var reverseHead = head, reverseTail;
+  if(m === 1) {
+    reverseHeadPrev.next = reverseHead;
+    while(n-- > 0) {
+      reverseTail = reverseHead;
+      reverseHead = reverseHead.next;
+    }
+    reverseTail.next = null;
+    reverseTail = reverseHeadPrev.next;
+    reverseHeadPrev = reverseList(reverseTail);
+    reverseTail.next = reverseHead;
+    return reverseHeadPrev;
+  }
+  while(n-- > 0) {
+    if(--m > 0) {
+      reverseHeadPrev = reverseHead;
+    } else {
+      reverseTail = reverseHead;
+    }
+    reverseHead = reverseHead.next;
+  }
+  reverseTail.next = null;
+  reverseTail = reverseHeadPrev.next;
+  reverseHeadPrev.next = null;
+  reverseHeadPrev.next = reverseList(reverseTail);
+  reverseTail.next = reverseHead;
+  return head;
+};
+var reverseList = function(head) {
+  var prev, next;
+  if(!head || !head.next) {
+    return head;
+  }
+  while(head) {
+    next = head.next;
+    head.next = prev;
+    prev = head;
+    head = next;
+  }
+  return prev;
+};
+
+var reverseBetween = function(head, m, n) {
+    if(head === null) return null;
+    let dummy = new ListNode(0),
+        pre = dummy;
+    
+    dummy.next = head;
+    
+    for(let i = 0; i < m - 1; i++) {
+        pre = pre.next;
+    }
+    
+    let start = pre.next;
+    let then = start.next;
+    
+    for(let i = 0; i < n - m; i++) {
+        start.next = then.next;
+        then.next = pre.next;
+        pre.next = then;
+        then = start.next;
+    }
+    
+    return dummy.next;
+    
+};
+</script>

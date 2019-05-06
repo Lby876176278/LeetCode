@@ -1,0 +1,42 @@
+<script>
+/**
+ * @param {string} moves
+ * @return {boolean}
+ */
+var judgeCircle = function(moves) {
+  if(moves.length === 0) {
+    return true;
+  } else {
+    var uMoves = 0;
+    var dMoves = 0;
+    var lMoves = 0;
+    var rMoves = 0;
+    for(var i = 0; i < moves.length; i++) {
+      if(moves[i] === 'U') {
+        uMoves++;
+      } else if(moves[i] === 'D') {
+        dMoves++;
+      } else if(moves[i] === 'L') {
+        lMoves++;
+      } else {
+        rMoves++;
+      }
+    }
+    return uMoves === dMoves && lMoves === rMoves;
+  }
+};
+
+var judgeCircle = function(moves) {
+  var hash = {
+    'U': 1,
+    'D': -1,
+    'R': 100,
+    'L': -100
+  };
+  var sum = 0;
+  for(var i = 0; i < moves.length; i++) {
+    sum += hash[moves[i]];
+  }
+  return !sum;
+}
+</script>

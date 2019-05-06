@@ -1,0 +1,9 @@
+<script>
+var isPowerOfFour = function(n) {
+  if(n <= 0) return false;
+  if(n == 1) return true;
+  var str = n.toString(2);
+  var strSlice = str.slice(1);
+  return strSlice.length % 2 != 0  && strSlice == 0;
+};
+</script>

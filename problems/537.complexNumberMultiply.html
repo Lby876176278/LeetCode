@@ -1,0 +1,74 @@
+<script>
+var complexNumberMultiply = function(a, b) {
+  var apos = 0;
+  var bpos = 0;
+  var areal, aimag, breal, bimag;
+  if(a.indexOf('+') !== -1) {
+    apos = a.indexOf('+');
+    areal = a.substring(0, apos);
+    aimag = a.substring(apos + 1, a.length - 1);
+  }
+  if(b.indexOf('+') !== -1) {
+    bpos = b.indexOf('+');
+    breal = b.substring(0, bpos);
+    bimag = b.substring(bpos + 1, b.length - 1);
+  }
+  return (areal * breal - (aimag * bimag)).toString() + '+' +(areal * bimag + aimag * breal).toString() + 'i';
+};
+
+var complexNumberMultiply = function(a, b) {
+  var a = parseComplex(a);
+  var b = parseComplex(b);
+  var real = a[0] * b[0] - a[1] * b[1];
+  var imag = a[0] * b[1] + a[1] * b[0];
+  return `${real}+${imag}i`;
+}
+var parseComplex = function(c) {
+  var parts = c.split('+');
+  var real = parts[0];
+  var imag = parts[1];
+  return [real, imag];
+};
+
+var complexNumberMultiply = function(a, b) {
+    return(mult(parse(a), parse(b)).toString());
+}
+
+class ComplexNumber {
+    constructor(real, comp) {
+        this.real = real;
+        this.comp = comp;
+    }
+    
+    getReal() {
+        return this.real;
+    }
+    
+    getComp() {
+        return this.comp;
+    }
+    
+    toString() {
+        return `${this.real}+${this.comp}i`;
+    }
+}
+
+const mult = function(x, y) {
+    
+    const first = x.getReal() * y.getReal();
+    const outside = x.getReal() * y.getComp();
+    const inside = x.getComp() * y.getReal();
+    const last = x.getComp() * y.getComp() * -1;
+    
+    return new ComplexNumber(first+last, outside+inside);
+}
+
+const parse = function(s) {
+    const indexPlus = s.indexOf("+");
+    const real = Number(s.slice(0,indexPlus));
+    const comp = Number(s.slice(indexPlus+1, s.indexOf("i")));
+    
+    return new ComplexNumber(real, comp);
+    
+};
+</script>

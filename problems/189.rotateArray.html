@@ -1,0 +1,9 @@
+<script>
+var rotate = function(nums, k) {
+  var step = k % nums.length;
+  for (var i = 0; i < step; i++) {
+    var value = nums.pop();
+    nums.unshift(value);
+  }
+};
+</script>

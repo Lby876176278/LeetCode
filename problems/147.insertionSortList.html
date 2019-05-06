@@ -1,0 +1,56 @@
+<script>
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var insertionSortList = function(head) {
+  if(!head || !head.next) return head;
+  let sortList = new ListNode(head.val);
+  let node = sortList;
+  while(head.next !== null) {
+    head = head.next;
+    if(head.val < node.val) {
+      let temp = new ListNode(head.val);
+      temp.next = sortList;
+      sortList = temp;
+      node = sortList;
+    } else {
+      while(head.val >= node.val && node.next && head.val >= node.next.val) {
+        node = node.next;
+      }
+      let temp = new ListNode(head.val);
+      let temp2 = node.next;
+      temp.next = node.next;
+      node.next = temp;
+      node = sortList;
+    }
+  }
+  return sortList;
+};
+
+var insertionSortList = function(head) {
+    if (!head || !head.next) return head;
+    let dummyHead = new ListNode(), p = head;
+    dummyHead.next = head;
+    while (p.next) {
+        if (p.val < p.next.val) {
+            p = p.next;
+        } else {
+            let temp = p.next, q = dummyHead;
+            p.next = p.next.next;
+            while (q.next.val < temp.val)
+                q = q.next;
+            temp.next = q.next;
+            q.next = temp;
+        }
+    }
+    return dummyHead.next;
+};
+</script>

@@ -1,0 +1,55 @@
+<script>
+var deleteDuplicates = function(head) {
+  if(head === null || head.next === null) {
+    return head;
+  }
+  var prev = new ListNode(0);
+  var node = head;
+  prev.next = head;
+  head = prev;
+  while(node && node.next && node.next.next) {
+    if(node.val === node.next.val) {
+      node = node.next;
+      head.next = node;
+      if(node.val !== node.next.val) {
+        node = node.next;
+        head.next = node;
+      }
+    } else {
+      node = node.next;
+      head = head.next;
+    }
+  }
+  if(node.next === null) {
+    return prev.next;
+  }
+  if(node.val === node.next.val) {
+    head.next = null
+  }
+  return prev.next;
+};
+
+var deleteDuplicates = function (head) {
+    if (head == null) return null
+    let dummyNode = new ListNode(0)
+    dummyNode.next = head
+    let cur = head
+    let noReapt = dummyNode
+    while (cur) {
+        //重复直走
+        while (cur.next != null && cur.val === cur.next.val) {
+            cur = cur.next
+        }
+        //元素不重复，放心走
+        if (noReapt.next == cur) {
+            noReapt = noReapt.next
+        }
+        else {
+            //是重复元素,省略中间的那堆
+            noReapt.next = cur.next
+        }
+        cur = cur.next
+    }
+    return dummyNode.next
+};
+</script>

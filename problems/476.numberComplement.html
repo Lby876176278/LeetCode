@@ -1,0 +1,32 @@
+<script>
+var findComplement = function(num) {
+  var numBits = num.toString(2);
+  var str = '';
+  var length = numBits.length;
+  for(var i = 0; i < length; i++) {
+    if(numBits[i] === '1') {
+      str += '0';
+    } else {
+      str += '1';
+    }
+  }
+  return parseInt(str, 2);
+};
+
+var findComplement = function(num) {
+  for(var i = 1;;i*=2){
+      if(num<i){
+          return i - num - 1;
+      }
+  }
+};
+
+var findComplement = function(num) {
+  var temp = num, mask = 1;
+  while(temp){
+    temp >>= 1;
+    mask <<= 1;
+  }
+  return ((mask - 1) ^ num);  
+};
+</script>

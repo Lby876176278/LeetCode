@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    /**
+     * @param {number[]} A
+     * @return {number}
+     */
+    var repeatedNTimes = function(A) {
+        var numberMap = {};
+        var result;
+        for (var i = 0; i < A.length; i++) {
+            if (!numberMap[A[i]]) {
+                numberMap[A[i]] = 1
+            } else {
+                result = A[i];
+                break;
+            }
+        }
+        return result;
+    };
+    </script>
+    <script>
+    /**
+     * @param {number[]} A
+     * @return {number}
+     */
+    var repeatedNTimes = function(A) {
+        //iterate through A until I hit non unique number
+        //filter all non unique numbers.
+        //return length
+
+        let arrSet = new Set();
+
+        for (let i = 0; i < A.length; i++) {
+            let currNum = A[i];
+            if (arrSet.has(currNum)) {
+                return currNum;
+            } else arrSet.add(currNum);
+        }
+    };
+    </script>
+</body>
+
+</html>

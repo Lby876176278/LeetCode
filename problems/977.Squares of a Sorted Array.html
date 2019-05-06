@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    /**
+     * @param {number[]} A
+     * @return {number[]}
+     */
+    var sortedSquares = function(A) {
+        return A.map((value) => Math.abs(value) ** 2).sort((a, b) => a - b);
+    };
+    </script>
+    <script>
+    /**
+     * @param {number[]} A
+     * @return {number[]}
+     */
+    var sortedSquares = function(A) {
+        // two pointer
+        let len = A.length
+        let j = 0
+        while (j < len && A[j] < 0) {
+            j++
+        }
+        let i = j - 1
+        let newArr = []
+        let t = 0
+        while (i >= 0 && j < len) {
+            if (A[i] * A[i] < A[j] * A[j]) {
+                newArr[t++] = A[i] * A[i]
+                i--
+            } else {
+                newArr[t++] = A[j] * A[j]
+                j++
+            }
+        }
+        while (i >= 0) {
+            newArr[t++] = A[i] * A[i]
+            i--
+        }
+        while (j < len) {
+            newArr[t++] = A[j] * A[j]
+            j++
+        }
+        return newArr
+    };
+    </script>
+    <script>
+    /**
+     * @param {number[]} A
+     * @return {number[]}
+     */
+    var sortedSquares = function(A) {
+        const left = [],
+            ans = [];
+        while (A.length) {
+            if (A[0] < 0) {
+                left.unshift(-A.shift());
+            } else {
+                break;
+            }
+        }
+        while (left.length && A.length) {
+            if (left[0] < A[0]) {
+                const l = left.shift();
+                ans.push(l * l);
+            } else {
+                const r = A.shift();
+                ans.push(r * r);
+            }
+        }
+        return ans.concat(left.map(e => e * e), A.map(e => e * e));
+    };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+<script>
+var arrayPairSum = function(nums) {
+  var result = nums.sort((x, y) => x - y);
+  var sum = 0;
+  for(var i = 0; i < nums.length; i += 2) {
+      sum += nums[i];
+  }
+  return sum;
+};
+
+var arrayPairSum = function(nums) {
+	return nums.sort((x, y) => x - y).filter((v, i) => v % i === 0).reduce((a, b) => a + b, 0);
+}
+</script>

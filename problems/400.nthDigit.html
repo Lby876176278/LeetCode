@@ -1,0 +1,42 @@
+<script>
+var findNthDigit = function(n) {
+  var round = 1;
+  var nowNth = 9;
+  var lastNth;
+  var nowNum = 9;
+  var lastNum;
+  var result = n;
+  var nth;
+  while(n > nowNth) {
+    round++;
+    lastNth = nowNth;
+    nowNth += round * 9 * 10 ** (round - 1);
+    lastNum = nowNum;
+    nowNum += 9 * 10 ** (round - 1);
+    if(n <= nowNth) {
+      result = lastNum + Math.ceil((n - lastNth) / round);
+      nth = (n - lastNth) % round;
+      if(nth === 0) {
+        result = result.toString()[round - 1];
+      } else {
+        result = result.toString()[nth - 1];
+      }
+    }
+  }
+  return parseInt(result);
+};
+
+var findNthDigit = function(n) {
+    var dig = 1;
+    var sum = 9;
+    while(n > dig*sum){
+        n -= dig*sum;
+        sum *= 10;
+        dig++;
+    }
+    //index表示在第几位，temp表示是第几个数，dig为n落在dig位数区间内
+    var index = n % dig == 0 ? dig : n % dig;
+    var temp = Math.pow(10,dig-1) + (index == dig ? parseInt(n/dig-1) : parseInt(n/dig));
+    return parseInt(temp.toString().charAt(index-1));
+};
+</script>

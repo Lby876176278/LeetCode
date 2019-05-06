@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    /**
+     * @param {string} J
+     * @param {string} S
+     * @return {number}
+     */
+    var numJewelsInStones = function(J, S) {
+        if (!J || !S) {
+            return 0;
+        }
+
+        let result = 0;
+
+        let set = new Set(J.split(''));
+
+        S.split('').forEach((v) => {
+            if (set.has(v)) {
+                result++;
+            }
+        })
+
+        return result;
+    };
+
+        /**
+     * @param {string} J
+     * @param {string} S
+     * @return {number}
+     */
+    var numJewelsInStones = function(J, S) {
+        if (!J || !S) {
+            return 0;
+        }
+
+        let result = 0;
+
+        S.split('').forEach((v) => {
+            !~J.indexOf(v) ? result : result++;
+        })
+
+        return result;
+    };
+    </script>
+</body>
+
+</html>

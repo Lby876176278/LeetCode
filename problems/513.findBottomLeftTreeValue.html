@@ -1,0 +1,53 @@
+<script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var findBottomLeftValue = function(root) {
+  var result = levelOrder(root);
+  var len = result.length;
+  return result[len - 1][0];
+};
+var levelOrder = function(root) {
+  if(!root) {
+    return root;
+  }
+  var row = [root];
+  var result = [];
+  var temp;
+  var len;
+  while(len = row.length) {
+    temp = [];
+    for(var i = 0; i < len; i++) {
+      temp.push(row[i].val);
+      if(row[i].left) row.push(row[i].left);
+      if(row[i].right) row.push(row[i].right);
+    }
+    row.splice(0, len);
+    result.push(temp);
+  }
+  return result;
+};
+
+function findBottomLeftValue(root) {
+  if (root.left === null && root.right === null) return root.val
+  if (root.left === null) return findBottomLeftValue(root.right)
+  if (root.right === null) return findBottomLeftValue(root.left)
+
+  return depth(root.left) >= depth(root.right)
+    ? findBottomLeftValue(root.left)
+    : findBottomLeftValue(root.right)
+
+  function depth(root) {
+    if (root === null) return 0
+    return 1 + Math.max(depth(root.left), depth(root.right))
+  }
+} 
+</script>

@@ -1,0 +1,36 @@
+<script>
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var productExceptSelf = function(nums) {
+  let products = 1;
+  let result = [];
+  let zeroNums = 0;
+  let numsLen = nums.length;
+  products = nums.reduce((x, y) => {
+    if(y === 0) {
+      zeroNums++;
+      return x
+    } else {
+      return x * y
+    }
+  }, 1);
+  if(zeroNums >= 2) {
+    result = new Array(numsLen).fill(0);
+  } else if(zeroNums === 1) {
+    for(let i = 0; i < numsLen; i++) {
+      if(nums[i] === 0) {
+        result.push(products);
+      } else {
+        result.push(0)
+      }
+    }
+  } else {
+    for(let i = 0; i < numsLen; i++) {
+      result.push(products / nums[i])
+    }
+  }
+  return result;
+};
+</script>

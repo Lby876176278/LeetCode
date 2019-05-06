@@ -1,0 +1,14 @@
+<script>
+var reverse = function(x) {
+  var max = Math.pow(2,31) - 1;
+  if(0 < x && x < 10) return x;
+  var str = x + '';
+  var result = str.split('').reverse().join('');
+  if(~result.indexOf('-')) {
+    result = '-' + result.slice(0, result.length -1);
+  }
+  result = parseInt(result);
+  if(result > max || result < -(1 + max)) return 0;
+  return result;
+};
+</script>

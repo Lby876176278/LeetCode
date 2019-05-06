@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    /**
+     * @param {number[]} A
+     * @return {number[]}
+     */
+    var sortArrayByParity = function(A) {
+        return A.filter((value) => {
+            if (value === 0) return value || value === 0
+            if (value % 2 === 0) return value
+        }).concat(A.filter((value) => {
+            if (value % 2 !== 0) return value
+        }))
+    };
+    </script>
+    <script>
+    /**
+     * @param {number[]} A
+     * @return {number[]}
+     */
+    var sortArrayByParity = function(A) {
+
+        const even = A.filter(num => num % 2 === 0);
+
+        const odd = A.filter(num => num % 2 === 1);
+
+        return even.concat(odd);
+
+    };
+    </script>
+    <script>
+    /**
+     * @param {number[]} A
+     * @return {number[]}
+     */
+    var sortArrayByParity = function(A) {
+        let slow = 0,
+            fast = 0;
+        while (fast < A.length) {
+            if (A[fast] % 2 === 0) {
+                let tmp = A[slow];
+                A[slow] = A[fast];
+                A[fast] = tmp;
+                slow += 1;
+            }
+            fast += 1;
+        }
+        return A;
+    };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var findFrequentTreeSum = function(root) {
+  if(!root) {
+    return [];
+  }
+  var values = [];
+  var result = [];
+  var resultHashMap = {};
+  var freq = 0;
+  var treeSum = function(root) {
+    if(!root.left && !root.right) {
+      return root;
+    }
+    var sum = 0;
+    if(root.left) {
+      root.left = treeSum(root.left);
+      values.push(root.left.val);
+    }
+    if(root.right) {
+      root.right = treeSum(root.right);
+      values.push(root.right.val);
+    }
+    if(root.left && root.right)  {
+      sum = root.left.val + root.right.val + root.val;
+    } else if(root.left && !root.right) {
+      sum = root.left.val + root.val;
+    } else {
+      sum = root.right.val + root.val;
+    }
+    root.val = sum;
+    return root;
+  }
+  root = treeSum(root);
+  values.push(root.val);
+  for(var i of values) {
+    if(resultHashMap[i]) {
+      resultHashMap[i]++;
+    } else {
+      resultHashMap[i] = 1;
+    }
+  }
+  for(var i in resultHashMap) {
+    if(resultHashMap[i] > freq) {
+      freq = resultHashMap[i];
+      result = [];
+      result.push(parseInt(i));
+    } else if(resultHashMap[i] < freq){
+      continue;
+    } else {
+      result.push(parseInt(i));
+    }
+  }
+  return result;
+};
+
+var findFrequentTreeSum = function(root) {
+    const map = {}
+    
+    function traverse (node) {
+        if (node === null) {
+            return
+        }
+        
+        let sum = node.val
+        if (node.left !== null) {
+            sum += traverse(node.left)
+        }
+        if (node.right !== null) {
+            sum += traverse(node.right)
+        }
+        
+        if (map[sum] === undefined) {
+            map[sum] = 1
+        }
+        else {
+            map[sum] += 1
+        }
+        
+        return sum
+    }
+    
+    traverse(root)
+    
+    let max = -Infinity
+    return Object.keys(map).reduce((acc, key) => {
+        if (map[key] > max) {
+            max = map[key]
+            return [Number(key)]
+        }
+        if (map[key] === max) {
+            acc.push(Number(key))
+        }
+        return acc
+    }, [])
+};
+
+var findFrequentTreeSum = function(root) {
+    if(!root) return [];
+    if(!root.left && !root.right) return [root.val];
+    const map = {};
+    
+    function calc(head) {
+        let sum = head.val;
+        if(head.left) sum += calc(head.left);
+        if(head.right) sum += calc(head.right);
+        
+        map[sum] = map[sum] === undefined ? 1 : map[sum]+1;
+        return sum;
+    }
+    
+    calc(root);
+    
+    let count = -1, result = [];
+    Object.keys(map).forEach(key => {
+        let current = map[key];
+        if( current > count) {
+            result = [+key];
+            count = current;
+        } else if(count === current) {
+            result.push(+key)
+        }
+    });
+    
+    return result;
+};
+</script>

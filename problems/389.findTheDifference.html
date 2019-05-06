@@ -1,0 +1,26 @@
+<script>
+var findTheDifference = function(s, t) {
+  var n = 0;
+  for(var i = 0; i < s.length; i++) {
+    n ^= s.charCodeAt(i);
+  };
+  for(i = 0; i < t.length; i++) {
+    n ^= t.charCodeAt(i);
+  }
+  return String.fromCharCode(n);
+};
+
+var findTheDifference = function(s, t) {
+  var sr = s.split('');
+  var tr = t.split('');
+  var pos;
+  for(var i = 0; i < sr.length; i++) {
+    if((pos = tr.indexOf(sr[i])) !== -1) {
+      sr.shift();
+      tr.splice(pos, 1);
+      i--;
+    }
+  };
+  return tr.toString();
+};
+</script>

@@ -1,0 +1,75 @@
+<script>
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var findDuplicates = function(nums) {
+  let dropDuplicates = Array.from(new Set(nums));
+  let dropDuplicatesLen = dropDuplicates.length;
+  let numsLen = nums.length;
+  let result = [];
+  for(let i = 0; i < numsLen; i++) {
+    if(nums[i] === dropDuplicates[0]) {
+      nums.splice(i, 1);
+      dropDuplicates.splice(0, 1);
+      i--;
+      numsLen--;
+      dropDuplicatesLen--;
+    }
+    if(!dropDuplicatesLen) {
+      break;
+    }
+  }
+  return nums;
+};
+
+var findDuplicates = function (nums) {
+  // let result = [];
+  // nums.sort((x, y) => x - y);
+  // for (let i = 1; i < nums.length; i++) {
+  //   if (nums[i - 1] === nums[i]) {
+  //       result.push(nums[i]);
+  //   }
+  // }
+  // return result;
+  let result = [];
+  let len = nums.length;
+  for (let i = 0; i < len; i++) {
+    let idx = nums[i] % len;
+    if (nums[idx] > len) {
+        result.push(idx || len);
+    } else {
+        nums[idx] += len;
+    }
+  }
+  return result;
+};
+
+var findDuplicates = function(nums) {
+  let result = [];
+  for(let i = 0; i < nums.length; i++) {
+    let index = Math.abs(nums[i]) - 1;
+    if (nums[index] < 0) {
+      result.push(index + 1);
+    }
+    nums[index] = -nums[index];
+  }
+  return result;
+};
+
+var findDuplicates = function (nums) {
+  var index
+  var res = []
+  //因为数组内元素的值在1~n之间所以将其作为新数组的下标值，
+  //遍历原数组，将下标对应位置的项乘上（-1）置为负值，若该项出现两次，
+  //则第二次出现时就又被置为正值，再将它的下标值 + 1 写入返回数组中。
+  for (var i = 0; i < nums.length; i++) {
+    index = Math.abs(nums[i]) - 1
+    nums[index] = -nums[index]  
+    if(nums[index] > 0){
+      res.push(index + 1)
+    }
+  }
+  return res;
+};
+</script>

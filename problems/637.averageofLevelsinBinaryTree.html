@@ -1,0 +1,22 @@
+<script>
+var averageOfLevels = function(root) {
+  if(!root) {
+    return [];
+  }
+  var row = [root];
+  var result = [];
+  var len;
+  var sum;
+  while(len = row.length) {
+    sum = 0;
+    for(var i = 0; i < len; i++) {
+      sum += row[i].val;
+      if(row[i].left) row.push(row[i].left);
+      if(row[i].right) row.push(row[i].right);
+    }
+    row.splice(0, len);
+    result.push(sum / len);
+  }
+  return result;
+};
+</script>

@@ -1,0 +1,38 @@
+<script>
+/**
+ * @param {number[]} timeSeries
+ * @param {number} duration
+ * @return {number}
+ */
+//Time Limit Exceeded
+var findPoisonedDuration = function(timeSeries, duration) {
+  if(!timeSeries || !duration) return 0
+  let set = new Set();
+  let timeSeriesLen = timeSeries.length;
+  let count = 0;
+  for(var i = 0; i < timeSeriesLen; i++) {
+    while(true) {
+      timeSeries[i] = ++timeSeries[i];
+      set.add(timeSeries[i]);
+      count++;
+      if(count === duration) break;
+    }
+    count = 0;
+  }
+  return set.size;
+};
+
+var findPoisonedDuration = function(timeSeries, duration) {
+  if(!timeSeries.length || !duration) return 0;
+  let poisonedTimes = duration;
+  let timeSeriesLen = timeSeries.length;
+  for(let i = 1; i < timeSeriesLen; i++) {
+    if(timeSeries[i - 1] + duration >= timeSeries[i]) {
+      poisonedTimes += timeSeries[i] - timeSeries[i - 1];
+    } else {
+      poisonedTimes += duration;
+    }
+  }
+  return poisonedTimes;
+}
+</script>

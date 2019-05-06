@@ -1,0 +1,26 @@
+<script>
+var distributeCandies = function(candies) {
+  var prev = 0;
+  var result = [];
+  var max = candies.length / 2;
+  candies.sort((x, y) => x - y);
+  prev = candies[0];
+  result.push(candies[0]);
+  for(var i = 1; i < candies.length && result.length < max; i++) {
+    if(candies[i] !== prev) {
+      result.push(candies[i]);
+      prev = candies[i];
+    }
+  }
+  return result.length;
+};
+
+var distributeCandies = function(candies) {
+  var result = new Set();
+  var max = candies.length / 2;
+  for(var i = 0; i < candies.length && result.size < max; i++) {
+    result.add(candies[i]);
+  }
+  return result.size;
+};
+</script>

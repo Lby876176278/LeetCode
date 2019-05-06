@@ -1,0 +1,65 @@
+<script>
+var countPrimes = function(n) {
+  var count = 0;
+  for(var i = 2; i < n; i++) {
+    if(isPrime(i)) {
+      count++;
+    }
+  }
+  return count;
+};
+
+var isPrime = function(n) {
+  if(n <= 1 || !n) {
+    return false;
+  }
+  var n_sqrt = Math.sqrt(n);
+  for(var i = 2; i <= n_sqrt; i++) {
+    if(n % i === 0) {
+      return false;
+    }
+  }
+  return true;
+};
+
+var countPrimes = function(n) {
+    var notPrime = new Array(n);
+    var i, j, k;
+    var count = 0;
+    
+    notPrime.fill(false);
+    notPrime[0] = true;
+    notPrime[1] = true;
+    
+    for (i = 2 ; i < n; i++) {
+        if(!notPrime[i]) {
+            for (j= 2; i * j < n; j++) {
+                notPrime[i*j] = true;
+            }
+        }
+    }
+    
+    for (k = 2; k < n; k++) {
+        if(!notPrime[k]) {
+            count++;
+        }
+        
+    }
+    
+    return count;
+};
+
+var countPrimes = function(n) {
+    var xs = new Array(n)
+    var count = 0
+    for(var i = 2; i < n; i++) {
+        if (! xs[i]) {
+            count++
+            for(var j = 2; i * j < n; j++) {
+                xs[i*j] = true
+            }
+        }
+    }
+    return count           
+};
+</script>

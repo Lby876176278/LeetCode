@@ -1,0 +1,54 @@
+<script>
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+  var prev = null, next;
+  if(!head || !head.next) {
+    return head;
+  }
+  while(head) {
+    next = head.next;
+    head.next = prev;
+    prev = head;
+    head = next;
+  }
+  return prev;
+};
+//递归写法
+var reverseList = function(head) {
+  var prev, next;
+  if(!head) return null;
+  if(!head.next) return head;
+  next = head.next;
+  head.next = prev;
+  prev = head;
+  head = next;
+  var newhead = reverseList(next);
+  head.next = prev;
+  head = prev;
+  return newhead;
+};
+
+function reverseList(head) {2
+  if (!head) {
+    return null
+  }
+  if (!head.next) {
+    return head
+  }
+  var second = head.next
+  var newHead = reverseList(head.next)
+  second.next = head
+  head.next = null
+  return newHead
+}
+</script>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    /**
+     * @param {number[][]} A
+     * @return {number[][]}
+     */
+    var flipAndInvertImage = function(A) {
+        return A.map((eachRowItem) => eachRowItem.reverse().map((item) => item = (item === 0 ? 1 : 0)));
+    };
+    </script>
+    <script>
+    /**
+     * @param {number[][]} A
+     * @return {number[][]}
+     */
+    var flipAndInvertImage = function(A) {
+        for (let i = 0; i < A.length; i++) {
+            A[i] = A[i].map(v => (v == 1) ? 0 : 1).reverse()
+        }
+        return A
+    };
+    </script>
+    <script>
+    /**
+     * @param {number[][]} A
+     * @return {number[][]}
+     */
+    const flipAndInvertImage = A => {
+        const lenA = A.length;
+
+        if (lenA < 1 || lenA > 20)
+            return [];
+
+        return A.map(row => row.reverse().map(val => val ^ 1));
+    };
+    </script>
+    <script>
+    /**
+     * @param {number[][]} A
+     * @return {number[][]}
+     */
+    var flipAndInvertImage = function(A) {
+        for (var i = 0; i < A.length; i++) {
+            A[i].reverse();
+            for (var j = 0; j < A[i].length; j++) {
+                A[i][j] === 0 ? A[i][j] = 1 : A[i][j] = 0;
+            }
+        }
+        return A;
+    };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    /**
+     * @param {string[]} emails
+     * @return {number}
+     */
+    var numUniqueEmails = function(emails) {
+        let result = 0;
+
+        emails.forEach((v, i) => {
+            function exceptPeriod(string) {
+                let periodPos = string.indexOf('.');
+                let plusPos = string.indexOf('+');
+                let atPos = string.indexOf('@');
+                let temp = '';
+
+                if (periodPos > atPos && plusPos > atPos) {
+                    return string;
+                } else {
+                    if (periodPos < plusPos) {
+                        temp = exceptPeriod(string.slice(0, periodPos).concat(string.slice(periodPos + 1)));
+                        return temp;
+                    } else if (periodPos > plusPos) {
+                        temp = string.slice(0, plusPos).concat(string.slice(atPos));
+                        return temp;
+                    } else {
+                        return string;
+                    }
+                }
+            }
+
+            emails[i] = exceptPeriod(v);
+        })
+
+        let set = new Set(emails);
+
+        result = set.size;
+
+        return result;
+    };
+
+    /**
+     * @param {string[]} emails
+     * @return {number}
+     */
+    var numUniqueEmails = function(emails) {
+        const set = new Set();
+        emails.forEach(email => {
+            let [local, domain] = email.split('@');
+            local = local.split('+')[0].replace(/\./g, '');
+            set.add(local + '@' + domain);
+        });
+        return set.size;
+    };
+
+    /**
+     * @param {string[]} emails
+     * @return {number}
+     */
+    var numUniqueEmails = function(emails) {
+        //正则表达式
+        let newEmails = emails.map(email => {
+            let splitEmail = email.split('@');
+            let localName = splitEmail[0].replace(/\+.*/, '').replace(/\./g, '')
+            return localName + splitEmail[1];
+        })
+
+        let unique = newEmails.filter((email, index) => {
+            return newEmails.indexOf(email) === index;
+        })
+
+        return unique.length
+    }
+
+    const numUniqueEmails = (emails) => {
+        const emailSet = {};
+        let count = 0;
+
+        for (let i = 0; i < emails.length; i += 1) {
+            const currentEmail = emails[i];
+            const [localName, domainName] = emails[i].split('@');
+            let parsedLocalName = '';
+
+            for (let j = 0; j < localName.length; j += 1) {
+                const currentChar = localName[j];
+
+                if (currentChar === '+') break;
+                if (currentChar === '.') continue;
+
+                parsedLocalName += currentChar;
+            }
+
+            if (!emailSet[parsedLocalName + domainName]) {
+                emailSet[parsedLocalName + domainName] = true;
+                count += 1;
+            }
+        }
+
+        return count;
+    };
+    </script>
+</body>
+
+</html>

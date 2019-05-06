@@ -1,0 +1,56 @@
+<script>
+var isPalindrome = function(head) {
+  var lStr = '';
+  var rStr = '';
+  while(head !== null) {
+    lStr += head.val;
+    rStr = head.val + rStr;
+    head = head.next;
+  }
+  return lStr === rStr;
+};
+
+var isPalindrome = function(head) {
+
+    var middle = findMiddle(head);   // 找尋中點
+    var rNode = reverseNode(middle); // 從中點反轉
+
+    // 比對反轉後的node與head前半段是否相等
+    while(rNode != null){
+        if(head.val != rNode.val) {
+            return false;
+        }
+        head = head.next;
+        rNode = rNode.next;
+    }
+    return true;
+
+
+
+    // 使用快慢指針找出中點
+    function findMiddle(node){
+        var fast = node;
+        var slow = node;
+
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+    // 反轉linked list
+    function reverseNode(node){
+        if(node==null || node.next==null) return node;  
+        var prev = null;
+        var cur  = node;
+        while(cur != null){
+            var temp = cur;
+            cur = cur.next;   
+            temp.next = prev;
+            prev = temp;
+        }
+        return prev;
+    }
+};
+</script>

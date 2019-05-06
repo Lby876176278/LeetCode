@@ -1,0 +1,45 @@
+<script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var invertTree = function(root) {
+  if(!root) {
+    return root;
+  } else if(!root.left && !root.right) {
+    return root;
+  }
+  var node;
+  node = root.left;
+  root.left = invertTree(root.right);
+  root.right = invertTree(node);
+  return root;
+};
+
+var invertTree = function(root) {
+    if(!root)
+        return null;
+    var temp = root.left;
+    root.left = root.right;
+    root.right = temp;
+    root.left = invertTree(root.left);
+    root.right = invertTree(root.right);
+    return root;
+};
+
+var invertTree = function(root) {
+    if (!root) return root;
+    let tmp = null;
+    if (root.right) tmp = invertTree(root.right)
+    if (root.left) root.right = invertTree(root.left); else root.right = null;
+    root.left = tmp;
+    return root;
+};
+</script>

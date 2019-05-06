@@ -1,0 +1,67 @@
+<script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {number[]} nums
+ * @return {TreeNode}
+ */
+var constructMaximumBinaryTree = function(nums) {
+  var left, right;
+  var value = -Infinity;
+  var pos;
+  var len = nums.length;
+  if(len > 1) {
+    for(var i = 0; i < len; i++) {
+      if(nums[i] > value) {
+        value = nums[i];
+        pos = i;
+      }
+    }
+  } else if(len === 1){
+    return new TreeNode(nums[0]);
+  } else {
+    return null;
+  }
+  left = nums.slice(0, pos);
+  right = nums.slice(pos + 1, len + 1);
+  var node = new TreeNode(value);
+  node.left = constructMaximumBinaryTree(left);
+  node.right = constructMaximumBinaryTree(right);
+  return node;
+};
+
+function findMaxIdx(nums,begin,end){
+    
+    let ret = begin;
+    for(let i = begin + 1; i <= end; i++) {
+        if(nums[ret] < nums[i]){
+            ret = i;
+        }
+    }
+    return ret;
+}
+function createMaxBinaryTree(nums,begin,end){
+    
+    if(begin > end) {
+        return null;
+    }
+    let maxIdx = findMaxIdx(nums,begin,end);
+    let root = new TreeNode(nums[maxIdx]);
+    root.left = createMaxBinaryTree(nums, begin, maxIdx-1);
+    root.right = createMaxBinaryTree(nums, maxIdx+1, end);
+    return root;
+}
+
+var constructMaximumBinaryTree = function(nums) {
+    
+    if(!nums || nums.length === 0) {
+        return null;
+    }
+    return createMaxBinaryTree(nums, 0, nums.length-1);
+};
+</script>

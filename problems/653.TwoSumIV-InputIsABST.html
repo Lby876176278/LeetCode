@@ -1,0 +1,54 @@
+<script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} k
+ * @return {boolean}
+ */
+var findTarget = function(root, k) {
+  var findTheNum = function(root, v) {
+    if(!root.left && v < root.val) return false;
+    else if(!root.right && v > root.val) return false;
+    if(v === root.val) {
+      return true;
+    } else if(v > root.val) {
+      return findTheNum(root.right, v);
+    } else {
+      return findTheNum(root.left, v);
+    }
+  }
+  if(!root || (!root.left && !root.right)) return false;
+  let row = [root];
+  let num = k - row[0].val;
+  let len;
+  row[0].val = -Infinity;
+  if(findTheNum(root, num)) return true;
+  row[0].val = k - num;
+  while(len = row.length) {
+    for(let i = 0; i < len; i++) {
+      if(row[i].left) {
+        row.push(row[i].left);
+        num = k - row[i].left.val;
+        row[i].left.val = -Infinity;
+        if(findTheNum(root, num)) return true;
+        row[i].left.val = k - num;
+      }
+      if(row[i].right) {
+        row.push(row[i].right);
+        num = k - row[i].right.val;
+        row[i].right.val = -Infinity;
+        if(findTheNum(root, num)) return true;
+        row[i].right.val = k - num;
+      }
+    }
+    row.splice(0, len);
+  }
+  return false;
+};
+</script>

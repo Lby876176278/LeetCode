@@ -1,0 +1,26 @@
+<script>
+var partition = function(head, x) {
+  if(head === null || head.next === null) {
+    return head;
+  }
+  var then = new ListNode(0), less = new ListNode(0);
+  var node = less;
+  var node2 = then;
+  while(head) {
+    if(head.val < x) {
+      less.next = head;
+      head = head.next;
+      less = less.next;
+    } else {
+      then.next = head;
+      head = head.next;
+      then = then.next;
+    }
+  }
+  if(node2.next) {
+    then.next = null;
+    less.next = node2.next;
+  }
+  return node.next;
+};
+</script>

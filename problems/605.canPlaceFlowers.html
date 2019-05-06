@@ -1,0 +1,76 @@
+<script>
+//结果要考虑全面，一共有三种情况：0,0,1,1,2,2  0,1,1,2,2,3  1,1,2,2,3,3
+var canPlaceFlowers = function(flowerbed, n) {
+  var count = 0;
+  var num = 0;
+  var newArr;
+  var length = flowerbed.length;
+  var flowerbedCopy = flowerbed.slice();
+  if(length === 1 && flowerbed[0] === 0) {
+    return true;
+  }
+  if(flowerbed[0] === 0) {
+    for(var i = 0; i < length; i++) {
+      if(flowerbed[i] === 0) {
+        count++;
+      }
+      if(flowerbed[i] === 1) {
+        num += Math.floor(count / 2);
+        newArr = flowerbed.splice(i);
+        count = 0;
+        break;
+      }
+      if(count === length) {
+        num += Math.ceil(count / 2);
+        count = 0;
+        break;
+      }
+    }
+  }
+  if(flowerbedCopy[length - 1] === 0) {
+    if(newArr) {
+      newArr.reverse();
+      for(var i = 0; i < newArr.length; i++) {
+        if(newArr[i] === 0) {
+          count++;
+        }
+        if(newArr[i] === 1) {
+          num += Math.floor(count / 2);
+          var newArr2 = newArr.splice(i);
+          newArr2.reverse();
+          count = 0;
+          break;
+        }
+      }
+    } else {
+      flowerbed.reverse();
+      for(var i = 0; i < flowerbed.length; i ++) {
+        if(flowerbed[i] === 0) {
+          count++;
+        }
+        if(flowerbed[i] === 1) {
+          num += Math.floor(count / 2);
+          newArr = flowerbed.splice(i);
+          count = 0;
+          break;
+        }
+      }
+    } 
+  }
+  var flower = flowerbed.length < length ? (newArr2 ? newArr2 : newArr) : flowerbed;
+  for(var i = 0; i < flower.length; i++) {
+    if(flower[i] === 0) {
+      count++;
+    } else {
+      num += Math.ceil(count / 2) - 1 < 0 ? 0 : Math.ceil(count / 2) - 1;
+      num < 0 ? num = 0 : num;
+      count = 0;
+    }
+  }
+  if(n <= num) {
+    return true;
+  } else {
+    return false;
+  }
+};
+</script>

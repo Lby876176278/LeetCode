@@ -1,0 +1,62 @@
+<script>
+var countBits = function(num) {
+  var result = [];
+  var sum = 0;
+  for(var i = 0; i <= num; i++) {
+    sum = i.toString(2).split('').reduce((x, y) => (x | 0) + (y | 0), 0);
+    result.push(sum);
+  }
+  return result;
+};
+
+var countBits = function(num) {
+  var result = [];
+  var count = 0;
+  var n = 0;
+  for(var i = 0; i <= num; i++) {
+    n = i;
+    while(n > 0) {
+      n & 1 === 1 ? count++ : 0;
+      n = n >> 1;
+    }
+    result.push(count);
+    count = 0;
+  }
+  return result;
+};
+
+var countBits = function(num) {
+  var res = [0];
+    for (var i = 1; i <= num; ++i) {
+      if (i % 2 === 0) res.push(res[i / 2]);
+      else res.push(res[(i - 1) / 2] + 1);
+    }
+    return res;
+};
+
+var countBits = function(num) {
+  var res = [0, 1], mask = 2;
+  for(var i = 2; i <= num; i++){
+    if(i === mask * 2) mask = i;
+    var x = i & (mask - 1);
+    res[i] = 1 + res[x];
+  }
+  return res;
+};
+
+var countBits = function(num) {
+	var result = [], count = 1, digit = 1, lastIndex = 0;
+  result.push(0);
+  result.push(1);
+  for(var i = 2; i <= num; i++){
+    if(count === digit){
+      digit ++;
+      count = 1;
+      lastIndex = i;
+    }
+    else count = result[lastIndex] + result[i - lastIndex];
+    result.push(count);
+  }
+  return result;
+};
+</script>

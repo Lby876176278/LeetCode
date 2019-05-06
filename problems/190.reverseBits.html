@@ -1,0 +1,41 @@
+<script>
+var reverseBits = function(n) {
+  if(n == 0) return 0;
+  var list = [];
+  for(var i = 0 ; i < 32 ; i++){
+    if(n > 0){
+      list.push(parseInt(n%2));
+      n = parseInt(n/2);
+    } else {
+      list.push(0);
+    }
+  }
+  return parseInt(list.join(""),2);
+};
+
+var reverseBits = function(n) {
+    var result = 0;
+    var count = 32;
+    while (count-- > 0) {
+        var digit = n & 1;
+        result = result * 2;
+        result += digit;
+        n = n >>> 1;
+    }
+    return result;
+};
+
+var reverseBits = function (n) {
+    var result = 0, length = 32;
+    while (length > 0) {
+        if (n === 0) {
+            result = result * 2;
+        } else {
+            result = result * 2 + n % 2;
+            n = Math.floor(n / 2);
+        }
+        length--;
+    }
+    return result;
+};
+</script>

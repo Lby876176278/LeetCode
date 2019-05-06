@@ -1,0 +1,35 @@
+<script>
+var swapPairs = function(head) {
+  var node = head;
+  var val;
+  while(node && node.next !== null) {
+    val = node.val;
+    node.val = node.next.val;
+    node.next.val = val;
+    if(node.next !== null && node.next.next !== null) {
+      node = node.next.next;
+    } else {
+      break;
+    }
+  }
+  return head;
+};
+
+//递归
+var swapPairs = function(head) {
+    if(!head) return null;
+    if(!head.next) return head;
+    
+    var newHead = head,
+        current = head;
+    newHead = newHead.next;
+    
+    var next = newHead.next;
+    current.next = next;
+    newHead.next = current;
+    
+    current.next = swapPairs(current.next);
+    
+    return newHead;
+};
+</script>

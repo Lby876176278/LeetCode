@@ -1,0 +1,61 @@
+<script>
+var removeNthFromEnd = function (head, n) {
+  var head = reverseList(head);
+  var node = head;
+  var prev;
+  if(n === 1) {
+    head = head.next;
+    return reverseList(head);
+  }
+  while(--n && node.next) {
+    prev = node;
+    node = node.next;
+  }
+  prev.next = node.next;
+  return reverseList(head);
+};
+var reverseList = function(head) {
+  var prev = null, next;
+  while(head) {
+    next = head.next;
+    head.next = prev;
+    prev = head;
+    head = next;
+  }
+  return prev;
+};
+
+var removeNthFromEnd = function(head, n) {
+    
+    var remIfNth = function $remIfNth(node)  {
+        var myNum = node.next ? $remIfNth(node.next) + 1 : 1;
+        
+        if (myNum === n + 1) {
+            node.next = node.next.next;
+        }
+        
+        return myNum;
+    }
+    
+    var headNum = remIfNth(head);
+    
+    return headNum === n ? head.next : head;
+};
+
+var removeNthFromEnd = function(head, n) {
+    // if(!head.next&&n===1) return null
+    let dummyHead = new ListNode(0)
+    dummyHead.next = head
+    let p = dummyHead, q = p
+    while(n-->=0) {
+        q = q.next
+    }
+    while (q) {
+        p = p.next
+        q = q.next
+    }
+
+    p.next = p.next.next
+    return dummyHead.next
+};
+</script>

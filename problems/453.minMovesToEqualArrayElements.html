@@ -1,0 +1,17 @@
+<script>
+var minMoves = function(nums) {
+  var sum = nums.reduce(function(x, y) {
+    return x + y;
+  });
+  var min = Math.min.apply(null, nums);
+  return sum - min * nums.length;
+};
+
+var minMoves = function(nums) {
+  var min = Math.min.apply(null, nums);
+  var sum = nums.reduce(function(x, y) {
+    return x + y - min;
+  }, 0);
+  return sum;
+};
+</script>

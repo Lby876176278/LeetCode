@@ -1,0 +1,13 @@
+<script>
+var matrixReshape = function(nums, r, c) {
+  var result = nums.reduce((a, b) => a.concat(b), []);
+  var outPut = [];
+  if(r * c !== result.length) {
+    return nums;
+  }
+  for(var i = 0; i < result.length; i += c) {
+    outPut.push(result.slice(i, i + c))
+  }
+  return outPut;
+};
+</script>

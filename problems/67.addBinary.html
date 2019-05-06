@@ -1,0 +1,47 @@
+<script>
+var addBinary = function(a, b) {
+	var aArr = a.split('');
+	var bArr = b.split('');
+	var aArrLen = aArr.length;
+	var bArrLen = bArr.length;
+	var result = new Array(Math.max(aArr.length, bArr.length) + 1).fill(0);
+	var rLen = result.length;
+	for( ; (aArrLen > 0) || (bArrLen > 0); ) {
+    var num = parseInt(aArr[--aArrLen] ? aArr[aArrLen] : 0) + parseInt(bArr[--bArrLen] ? bArr[bArrLen] : 0) + result[--rLen];
+    if(num > 1) {
+    	num = (num === 2) ? 0 : 1;
+    	result[rLen] = num;
+    	result[rLen - 1] = 1; 
+    } else {
+    	result[rLen] = num;
+    }
+	}
+	if(result[0] === 0) {
+		result.shift(0);
+	}
+	return result.join('');
+};
+
+ 
+var addBinary = function(a, b) {
+    var result = '';
+    var promote = 0;
+    var current;
+    for (let i=a.length - 1, j=b.length - 1; i >= 0 || j >= 0 || promote > 0; i--, j--) {
+        current = promote;
+        if (i >= 0) current += a[i] == '1' ? 1 : 0;
+        if (j >= 0) current += b[j] == '1' ? 1 : 0;
+        
+        if (current > 1) {
+            promote = 1;
+            current -= 2;
+        } else {
+            promote = 0;
+        }
+        
+        result = current.toString() + result;
+    }
+    
+    return result;
+};
+</script>

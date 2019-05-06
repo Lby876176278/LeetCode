@@ -1,0 +1,80 @@
+<script>
+var addTwoNumbers = function(l1, l2) {
+  var list = new ListNode(0);
+  var result = list;
+  var sum = 0;
+  while(l1 || l2) {
+    sum += (Boolean(l1) ? l1.val : 0);
+    sum += (Boolean(l2) ? l2.val : 0);
+    sum += result.val;
+    l1 = (Boolean(l1) ? l1.next : l1);
+    l2 = (Boolean(l2) ? l2.next : l2);
+    if(sum > 9) {
+      sum = sum % 10;
+      result.val = sum;
+      result.next = new ListNode(1);
+      result = result.next;
+    } else if(l1 === null && l2 === null) {
+      result.val = sum;
+    } else {
+      result.val = sum;
+      result.next = new ListNode(0);
+      result = result.next;
+    }
+    sum = 0;
+  }
+  return list;
+};
+
+
+var l1 = {val: 1, next: {val: 2, next: {val: 3, next: {val: 4, next: null}}}};
+var l2 = {val: 5, next: {val: 6, next: {val: 7, next: {val: 8, next: {val: 9, next: null}}}}};
+var addTwoNumbers = function(l1, l2) {
+  var list = {val: 0, next: null};
+  var result = list;
+  var sum = 0;
+  while(l1 || l2) {
+    sum += (Boolean(l1) ? l1.val : 0);
+    sum += (Boolean(l2) ? l2.val : 0);
+    sum += result.val;
+    l1 = (Boolean(l1) ? l1.next : l1);
+    l2 = (Boolean(l2) ? l2.next : l2);
+    if(sum > 9) {
+      sum = sum % 10;
+      result.val = sum;
+      result.next = {val: 1, next: null};
+      result = result.next;
+    } else if(l1 === null && l2 === null) {
+      result.val = sum;
+    } else {
+      result.val = sum;
+      result.next = {val: 0, next: null};
+      result = result.next;
+    }
+    sum = 0;
+  }
+  return list;
+};
+
+var addTwoNumbers = function(l1, l2) {
+    var list = new ListNode(0); 
+    var result = list; 
+    var sum,carry = 0; 
+    while(l1 || l2 || carry > 0){
+        sum = 0;
+        if(l1 !== null){
+            sum += l1.val;
+            l1 = l1.next;
+        }
+        if(l2 !==null){
+            sum += l2.val;
+            l2 = l2.next;
+        }
+        sum += carry;
+        list.next = new ListNode(sum % 10);
+        carry = parseInt(sum / 10);
+        list = list.next;
+    }  
+    return result.next;
+};
+</script>

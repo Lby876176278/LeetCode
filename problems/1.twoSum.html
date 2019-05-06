@@ -1,0 +1,27 @@
+<script>
+var twoSum = function(nums, target) {
+  var newNums = [];
+  for(var i = 0; i < nums.length; i++) {
+
+    for(var j = i + 1; j < nums.length; j ++) {
+      if(target === nums[i] + nums[j]) {
+        newNums.push(i, j);
+        return newNums;
+      }
+    }
+  }
+};
+
+var twoSum = function(nums, target) {
+  var newNums = [];
+  var sum
+  for(var i = 0; i < nums.length; i++) {
+    sum = target - nums[i];
+    index = nums.indexOf(sum);
+    if(index >= 0 && index != i) {
+      newNums.push(i, index);
+      return newNums;
+    }
+  }
+};
+</script>

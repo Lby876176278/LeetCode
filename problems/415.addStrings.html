@@ -1,0 +1,75 @@
+<script>
+var addStrings = function(num1, num2) {
+  var arr1 = num1.split('');
+  var arr2 = num2.split('');
+  var arrLen1 = arr1.length;
+  var arrLen2 = arr2.length;
+  var result = new Array(Math.max(arrLen1, arrLen2) + 1).fill(0);
+  var resultLen = result.length;
+  for(; (arrLen1 > 0) || (arrLen2 > 0);) {
+    var num = parseInt(arr1[--arrLen1] ? arr1[arrLen1] : 0) + parseInt(arr2[--arrLen2] ? arr2[arrLen2] : 0) + result[--resultLen];
+    if(num >= 10) {
+      num = num % 10;
+      result[resultLen] = num;
+      result[resultLen -1] = 1;
+    } else {
+      result[resultLen] = num;
+    }
+  }
+  if(result[0] === 0) {
+    result.shift(0);
+  }
+  return result.join('');
+};
+
+var addStrings = function(num1, num2) {
+    let carry = 0, ret = '';
+    let size1 = num1.length, size2 = num2.length;
+    let charCodeAtZero = '0'.charCodeAt(0);
+    for (let i = 0; i < size1 || i < size2 || carry === 1; i++) {
+        let a = i < size1 ? num1.charCodeAt(size1 - i - 1) - charCodeAtZero : 0;
+        let b = i < size2 ? num2.charCodeAt(size2 - i - 1) - charCodeAtZero : 0;
+        let temp = a + b + carry;
+        carry = 0;
+        if (temp > 9) {
+            carry = 1;
+            temp -= 10;
+        }
+        ret = temp + ret;
+    }
+    return ret;
+};
+
+var addStrings = function(num1, num2) {
+    var count = Math.max(num1.length, num2.length);
+    var index = 0;
+    var result = '';
+    var remaining = 0;
+    while (index++ < count) {
+        var digital1 = Number(num1[num1.length - index] || '0');
+        var digital2 = Number(num2[num2.length - index] || '0');
+        var sum = digital1 + digital2 + remaining;
+        remaining = sum > 9 ? 1 : 0;
+        result = String(sum > 9 ? sum - 10 : sum) + result;
+    }
+    if (remaining) {
+        result = String(remaining) + result;
+    }
+    return result;
+};
+
+var addStrings = function(num1, num2) {
+    let i = num1.length - 1, j = num2.length - 1, carry = 0, res = '';
+    
+    while (i >= 0 || j >= 0 || carry === 1) {
+        let a = i < 0 ? 0 : num1[i] - '0';
+        let b = j < 0 ? 0 : num2[j] - '0';
+        res = (a + b + carry) % 10 + res;
+        carry = parseInt((a + b + carry) / 10);
+        i--;
+        j--;
+    }
+    
+    return res;
+};
+</script>

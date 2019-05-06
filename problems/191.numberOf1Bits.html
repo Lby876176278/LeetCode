@@ -1,0 +1,12 @@
+<script>
+var hammingWeight = function(n) {
+  var count = 0;
+  var str = n.toString(2);
+  for(var i = 0; i < str.length; i++) {
+    if(str[i] & 1 === 1) {
+      count++;
+    }
+  }
+  return count;
+};
+</script>

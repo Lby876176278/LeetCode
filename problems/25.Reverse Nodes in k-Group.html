@@ -1,0 +1,171 @@
+<script>
+  /**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var reverseKGroup = function(head, k) {
+    if (!head) return null
+    if (!head.next) return head;
+    let result = null;
+    let prevNode = null;
+    let tempNode = null;
+    let tempList = head;
+    let listLength = getListLength(head);
+    let mod = listLength % k;
+    let count = 0;
+    if (k > listLength) {
+      return head;
+    }
+    while (head) {
+        listLength--;
+        count++;
+
+        tempNode = head;
+        head = head.next;
+
+        if (count === k) {
+            if (prevNode) {
+              tempList = prevNode.next;
+              prevNode.next = null;
+            }
+            tempNode.next = null;
+            tempNode = tempList;
+            tempList = reverseList(tempList);
+            tempNode.next = head;
+            if (!result && count === k) {
+                result = tempList;
+            }
+            if (prevNode) {
+              prevNode.next = tempList;
+            }
+            prevNode = tempNode;
+            count = 0;
+        }
+
+        if (listLength === mod) {
+            break;
+        }
+    }
+    return result;
+};
+
+function reverseList(head) {
+    if (!head) {
+        return null
+    }
+    if (!head.next) {
+        return head
+    }
+    var second = head.next
+    var newHead = reverseList(second)
+    second.next = head
+    head.next = null
+    return newHead
+}
+
+function getListLength(head) {
+    let count = 1;
+    while (head && head.next) {
+        count++;
+        head = head.next;
+    }
+    return count;
+}
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var reverseKGroup = function(head, k) {
+    if (!head || !head.next) return head;
+    let newHead = head;
+    let count = 0;
+    while (newHead && count < k) {
+        newHead = newHead.next;
+        count ++;
+    }
+    if (count === k) {
+        newHead = reverseKGroup(newHead, k);
+        while (count -- > 0) {
+            const next = head.next;
+            head.next = newHead;
+            newHead = head;
+            head = next;
+        }
+        return newHead; 
+    } else {
+        return head;
+    }
+};
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} list
+ * @param {number} k
+ * @return {ListNode}
+ */
+var reverseKGroup = function(list, k) {
+  if (k < 2) {
+    return list;
+  }
+  if (!list) {
+    return list;
+  }
+  const cache = {};
+  const result = new ListNode(0);
+  // head result
+  let headR = result;
+  // head source
+  let headS = list;
+  let j = k;
+
+  while (headS) {
+    j = k;
+    // 检查是否可以反转
+    while (headS && j) {
+      cache[k - j] = headS;
+      headS = headS.next;
+      j--;
+    }
+    // 不需要反转
+    if (j > 0) {
+      break;
+    }
+    // 执行反转
+    for (let i = k - 1; i >= 0; i--) {
+      headR.next = cache[i];
+      headR = headR.next;
+    }
+    // 最后一个节点的 next 应该设置为 null
+    // 防止循环链表
+    headR.next = null;
+  }
+
+  if (j > 0) {
+    headR.next = cache[0];
+  }
+  return result.next;
+};
+</script>

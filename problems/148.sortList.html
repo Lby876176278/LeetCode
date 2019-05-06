@@ -1,0 +1,56 @@
+<script>
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+//Time Limit Exceeded
+var sortList = function(head) {
+  if(!head) {
+    return head;
+  }
+  let root = list2BST(head);
+  let node = head;
+  (function bst2List(root, head) {
+    if(root) {
+      bst2List(root.left, head);
+      node.next = new ListNode(root.val);
+      node = node.next;
+      bst2List(root.right, head);
+    }
+    return
+  })(root, head)
+  return head.next;
+};
+
+function TreeNode(val) {
+  this.val = val;
+  this.left = this.right = null;
+}
+
+function list2BST(head) {
+  let root = new TreeNode(head.val);
+  while(head.next) {
+    head = head.next;
+    root = insert(root, head.val);
+  }
+  return root;
+}
+
+function insert(root, val) {
+  if(!root) {
+    return new TreeNode(val);
+  } else if(val > root.val) {
+    root.right = insert(root.right, val);
+  } else {
+    root.left = insert(root.left, val);
+  }
+  return root;
+}
+</script>

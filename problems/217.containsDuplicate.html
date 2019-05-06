@@ -1,0 +1,17 @@
+<script>
+var containsDuplicate = function(nums) {
+  var result = [];
+  for(var i = 0; i < nums.length; i++) {
+    if(!~result.indexOf(nums[i])) {
+      result.push(nums[i]);
+    } else {
+      return true;
+    }
+  }
+  return false;
+};
+
+var containsDuplicate = function(nums) {
+  return new Set(nums).size < nums.length;
+};
+</script>

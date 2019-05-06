@@ -1,0 +1,62 @@
+<script>
+var reverseWords = function(s) {
+  var words = s.split(' ');
+  return words.map(x => x.split('').reverse().join('')).join(' ');
+};
+
+var reverseWords = function(s) {
+    var arr = s.split(" ");
+    arr.forEach(function(word, index, array) {
+        var newWord = "";
+        for (var i = word.length-1; i >= 0; i --) {
+            newWord += word[i];
+        }
+        array[index] = newWord;
+    });
+    return arr.join(" ");
+};
+
+var reverseWords = function(s) {
+    var ret = ''
+    var lastPos = -1;
+    for(var i = 0; i < s.length; ++i) {
+        if(s[i] == ' ') {
+            ret += swap(s.substring(lastPos + 1, i)) + ' ';
+            lastPos = i;
+        }
+    }
+    ret += swap(s.substring(lastPos + 1, s.length));
+    return ret;
+};
+
+var swap = function(s) {
+    var ret = '';
+    for(var i = s.length - 1; i >= 0; --i)
+        ret += s[i]
+    return ret;
+}
+
+var reverseWords = function(s) {
+    if (s === null || s.length <= 1) 
+        return s;
+    let reverse = function(a, i, j) {
+        while (i < j) {
+            let t = a[i];
+            a[i] = a[j];
+            a[j] = t;
+            i++;
+            j--;
+        }
+    }    
+    let arr = s.split('');
+    for (let i = 0; i < s.length; i++) {
+        if (arr[i] != ' ') {
+            let j = i;
+            while (j + 1 < s.length && arr[j + 1] != ' ') j++;
+            reverse(arr, i, j);
+            i = j; // reset i index
+        }
+    }
+    return arr.join('');
+};
+</script>

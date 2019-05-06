@@ -1,0 +1,66 @@
+<script>
+var oddEvenList = function(head) {
+  if(head === null || head.next === null) {
+    return head;
+  }
+  var odd = head;
+  var even = head.next;
+  while(head && head.next) {
+    odd.next = even.next;
+    even.next = odd.next;
+  }
+  return odd;
+};
+
+var oddEvenList = function(head) {
+    if(head == null || head.next == null) return head;
+    var odd = head, ehead = head.next, even = ehead;
+    while(even != null && even.next != null){
+        odd.next = even.next;
+        odd = odd.next;
+        even.next = odd.next;
+        even = even.next;
+    }
+    odd.next = ehead;
+    return head;
+};
+
+//ListNode.val为odd的在前,even在后(妈蛋做错题)
+var oddEvenList = function(head) {
+  if(head === null || head.next === null) {
+    return head;
+  }
+  var odd = new ListNode(0),
+      even = new ListNode(0);
+  var oddNext = odd;
+  var evenNext = even;
+  var oddPrev, evenPrev;
+  while(head) {
+    if(head.val % 2 !== 0) {
+      oddNext.val = head.val;
+      oddNext.next = new ListNode(0);
+      oddPrev = oddNext;
+      oddNext = oddNext.next;
+    } else {
+      evenNext.val = head.val;
+      evenNext.next = new ListNode(0);
+      evenPrev = evenNext;
+      evenNext = evenNext.next;
+    }
+    head = head.next;
+  }
+  if(oddPrev) {
+    if(evenPrev) {
+      oddPrev.next = even;
+      evenPrev.next = null;
+      return odd;
+    } else {
+      oddPrev.next = null;
+      return odd;
+    }
+  } else if(evenPrev) {
+    evenPrev.next = null;
+    return even;
+  }
+};
+</script>

@@ -1,0 +1,107 @@
+<script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var inorderTraversal = function(root) {
+  let res = [];
+  walkTree(root, res);
+  return res;
+};
+
+function walkTree(node, res) {
+  if(!node) return;
+  if(node.left) {
+    walkTree(node.left, res);
+  }
+  res.push(node.val);
+  walkTree(node.right, res);
+}
+
+ var inorderTraversal = function(root) {
+  if (!root) return [];
+  
+  var temp = [], result = [];
+
+  temp.push(root);
+
+  while (temp.length) {
+    var elem = temp[temp.length - 1];
+
+    if (elem.left === 1) {
+      elem.left = 0;
+      result.push(elem.val);
+    } else if (elem.left) {
+      temp.push(elem.left);
+      elem.left = 1;
+    } else if (elem.left === null) {
+      elem.left = 1;
+    } else if (elem.right) {
+      temp.push(elem.right);
+      elem.right = null;
+    } else {
+      temp.pop();
+    }
+  }
+
+  return result;
+};
+
+
+//error
+var inorderTraversal = function(root) {
+  let result = [];
+  let temp = [root];
+  let tempTree = root;
+  while(tempTree || temp.length !== 0) {
+    while(tempTree) {
+      temp.push(tempTree);
+      tempTree = tempTree.left;
+    }
+    tempTree = temp.pop();
+    result.push(tempTree.val);
+    tempTree = tempTree.right;
+  }
+  return result;
+}
+
+ //error
+var inorderTraversal = function(root) {
+  if(!root) return [];
+  else if(root && !root.left && !root.right) return [root.val];
+  else if(root && !root.left && root.right) return [root.val, root.right.val];
+  let temp = [root];
+  let result = [];
+  let tempTree = root;
+  while(tempTree || temp.length !== 0) {
+    while(tempTree) {
+      if(tempTree.left) {
+        temp.push(tempTree.left);
+        tempTree = tempTree.left;
+      } else {
+        result.push(tempTree.val);
+        if(tempTree.right) {
+          temp.pop();
+          temp.push(tempTree.right);
+        } else if(!tempTree.left && !tempTree.right) {
+          tempTree === temp[temp.length - 1] ? temp.pop() : 1;
+        }
+        tempTree = tempTree.right;
+      }
+    }
+    tempTree = temp.pop();
+    result.push(tempTree.val);
+    if(tempTree === root) {
+      return result.concat(inorderTraversal(root.right));
+    }
+    tempTree = tempTree.right;
+  }
+};
+</script>

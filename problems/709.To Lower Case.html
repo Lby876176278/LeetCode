@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    /**
+     * @param {string} str
+     * @return {string}
+     */
+    var toLowerCase = function(str) {
+        //is faster than 'return str.toLowerCase()' ;
+        str = str.toLowerCase();
+        return str;
+    };
+
+    /**
+     * @param {string} str
+     * @return {string}
+     */
+    var toLowerCase = function(str) {
+        // if char code is less than 96, then add 32 to char code
+        return str.split('').map((char, index) => {
+            let ascii = str.charCodeAt(index);
+
+            if (ascii >= 65 && ascii <= 90) {
+                // return + 32
+                return String.fromCharCode(ascii + 32);
+            }
+            return char;
+        }).join('');
+    };
+    </script>
+</body>
+
+</html>
